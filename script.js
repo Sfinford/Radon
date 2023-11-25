@@ -45,9 +45,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateCurrentTrackDisplay(fileName) {
-        const displayName = fileName.replace(/\.[^/.]+$/, "");
-        currentTrackElement.textContent = `${displayName}`;
-    }
+    const maxDisplayLength = 25; // Set your desired max length here
+    const displayName = fileName.replace(/\.[^/.]+$/, ""); // Removing the file extension
+
+    // Truncate and append ellipsis if necessary
+    let displayText = displayName.length > maxDisplayLength
+        ? displayName.substring(0, maxDisplayLength) + "..."
+        : displayName;
+
+    currentTrackElement.textContent = displayText;
+}
 
     function updateMaxHistoryLength() {
         maxHistoryLength = Math.ceil(audioFiles.length * 0.8); // 20% reduction with ceiling

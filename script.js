@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('file-uploader').addEventListener('change', function(event) {
         audioFiles = event.target.files;
         updateMaxHistoryLength();
-        playAudioFile(0); // Play the first file initially
+        playRandomAudioFile(); // Play the first file initially
     });
 
     document.getElementById('restart-button').addEventListener('click', function() {
@@ -51,5 +51,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateMaxHistoryLength() {
         maxHistoryLength = Math.ceil(audioFiles.length * 0.8); // 20% reduction with ceiling
+    }
+
+function playRandomAudioFile() {
+        if (audioFiles.length > 0) {
+            let randomIndex = Math.floor(Math.random() * audioFiles.length);
+            playAudioFile(randomIndex);
+        }
     }
 });

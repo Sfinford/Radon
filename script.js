@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
     function updateMaxHistoryLength() {
-        maxHistoryLength = Math.ceil(audioFiles.length * 0.8); // 20% reduction with ceiling
+        maxHistoryLength = Math.floor(audioFiles.length * 0.8); // 20% reduction with ceiling
     }
 
 function playRandomAudioFile() {

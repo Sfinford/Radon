@@ -13,3 +13,4 @@ Radon is a simple modern music player that supports mp3, wav, and ogg. It is des
 - display of what files are uploaded and how many are uploaded
 - clean design with gradients
 - dark mode
+- choose between looping or autoplay for songs

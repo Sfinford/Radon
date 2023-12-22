@@ -5,6 +5,27 @@ document.addEventListener('DOMContentLoaded', function() {
     let history = [];
     let maxHistoryLength = 0; // Variable to store the dynamic max history length
 
+	let isLooping = false;
+
+document.getElementById('loop-toggle').addEventListener('click', function() {
+    isLooping = !isLooping;
+    this.textContent = isLooping ? "🔃" : "⏭️";
+});
+
+audioPlayer.addEventListener('ended', function() {
+    if (isLooping) {
+        audioPlayer.play();
+    } else {
+        if (audioFiles.length > 0) {
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * audioFiles.length);
+            } while (history.includes(randomIndex));
+            playAudioFile(randomIndex);
+        }
+    }
+});
+
     document.getElementById('file-uploader').addEventListener('change', function(event) {
         audioFiles = event.target.files;
         updateMaxHistoryLength();
@@ -57,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
     function updateMaxHistoryLength() {
-        maxHistoryLength = Math.floor(audioFiles.length * 0.8); // 20% reduction with ceiling
+        maxHistoryLength = Math.ceil(audioFiles.length * 0.8); // 20% reduction with ceiling
     }
 
 function playRandomAudioFile() {
